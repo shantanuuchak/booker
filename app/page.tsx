@@ -6,8 +6,10 @@ function Home() {
   return (
     <>
       <Header />
-      <AddBook />
-      <BookList />
+      <main className="max-w-7xl mx-auto px-2">
+        <AddBook />
+        <BookList />
+      </main>
     </>
   );
 }
