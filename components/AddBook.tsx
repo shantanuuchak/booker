@@ -1,20 +1,32 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowDown10, Cross } from "lucide-react";
 
-function AddBook() {
-  const [bookValue, setBookValue] = useState("");
-  const [authorValue, setAuthorValue] = useState("");
+function AddBook({ dispatch }: any) {
+  const inputBook = useRef(null);
+  const inputAuthor = useRef(null);
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!bookValue.trim() || !authorValue.trim()) {
-      return;
-    }
-    console.log(bookValue, authorValue);
-    setBookValue("");
-    setAuthorValue("");
+    const currBook = inputBook.current.value.trim();
+    const currAuthor = inputAuthor.current.value.trim();
+
+    if (!currBook || !currAuthor) return;
+
+    console.log(currBook, currAuthor);
+
+    dispatch({
+      type: "add",
+      payload: { title: currBook, author: currAuthor },
+    });
+
+    inputBook.current.value = "";
+    inputAuthor.current.value = "";
+  };
+
+  const handleSort = () => {
+    dispatch({ type: "sort" });
   };
 
   return (
@@ -23,21 +35,19 @@ function AddBook() {
         type="text"
         placeholder="Add a book"
         className="mb-1 p-6"
-        onChange={(e) => setBookValue(e.target.value)}
-        value={bookValue}
+        ref={inputBook}
       />
       <Input
         type="text"
         placeholder="Add author info"
         className="mb-3 p-6"
-        onChange={(e) => setAuthorValue(e.target.value)}
-        value={authorValue}
+        ref={inputAuthor}
       />
       <div className="flex gap-2">
         <Button type="submit">
           <Cross /> Add
         </Button>
-        <Button type="submit" variant="secondary">
+        <Button variant="secondary" onClick={handleSort}>
           <ArrowDown10 /> Sort
         </Button>
       </div>
