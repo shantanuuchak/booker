@@ -35,6 +35,8 @@ function Home() {
     },
   ]);
 
+  console.log(books);
+
   return (
     <>
       <Header />
