@@ -1,6 +1,6 @@
 import { Book } from "@/types/interfaces";
 
-type Action =
+export type Action =
   | { type: "add"; payload: { title: string; author: string } }
   | { type: "remove"; payload: string }
   | { type: "like"; payload: string }
