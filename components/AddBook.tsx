@@ -1,28 +1,31 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowDown10, Cross } from "lucide-react";
+import { Action } from "@/lib/reducer";
 
-function AddBook({ dispatch }: any) {
-  const inputBook = useRef(null);
-  const inputAuthor = useRef(null);
+interface AddBookProps {
+  dispatch: React.Dispatch<Action>;
+}
+
+function AddBook({ dispatch }: AddBookProps) {
+  const inputBook = useRef<HTMLInputElement>(null);
+  const inputAuthor = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const currBook = inputBook.current.value.trim();
-    const currAuthor = inputAuthor.current.value.trim();
+    const currBook = inputBook.current?.value.trim();
+    const currAuthor = inputAuthor.current?.value.trim();
 
     if (!currBook || !currAuthor) return;
-
-    console.log(currBook, currAuthor);
 
     dispatch({
       type: "add",
       payload: { title: currBook, author: currAuthor },
     });
 
-    inputBook.current.value = "";
-    inputAuthor.current.value = "";
+    if (inputBook.current) inputBook.current.value = "";
+    if (inputAuthor.current) inputAuthor.current.value = "";
   };
 
   const handleSort = () => {
@@ -47,7 +50,7 @@ function AddBook({ dispatch }: any) {
         <Button type="submit">
           <Cross /> Add
         </Button>
-        <Button variant="secondary" onClick={handleSort}>
+        <Button variant="secondary" onClick={handleSort} type="button">
           <ArrowDown10 /> Sort
         </Button>
       </div>
