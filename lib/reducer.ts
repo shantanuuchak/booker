@@ -1,7 +1,17 @@
-export const booksReducer = (state: any, action: any) => {
+import { Book } from "@/types/interfaces";
+
+type Action =
+  | { type: "add"; payload: { title: string; author: string } }
+  | { type: "remove"; payload: string }
+  | { type: "like"; payload: string }
+  | { type: "dislike"; payload: string }
+  | { type: "sort" };
+
+export const booksReducer = (state: Book[], action: Action): Book[] => {
   switch (action.type) {
     case "add":
-      const book = {
+      console.log("adding book");
+      const book: Book = {
         id: crypto.randomUUID(),
         title: action.payload.title,
         author: action.payload.author,
@@ -9,9 +19,10 @@ export const booksReducer = (state: any, action: any) => {
       };
       return [book, ...state];
     case "remove":
+      console.log("removing book");
       return state.filter((book) => book.id !== action.payload);
     case "like":
-      console.log("hey");
+      console.log("liking book");
       return state.map((book) => {
         if (book.id === action.payload) {
           return { ...book, rating: book.rating + 1 };
@@ -26,7 +37,8 @@ export const booksReducer = (state: any, action: any) => {
         return book;
       });
     case "sort":
-      return state.sort((a, b) => b.rating - a.rating);
+      console.log("sorting books");
+      return [...state].sort((a, b) => b.rating - a.rating);
     default:
       return state;
   }
