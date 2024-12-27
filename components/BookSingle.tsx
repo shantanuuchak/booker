@@ -1,3 +1,5 @@
+import { Book } from "@/types/interfaces";
+import { Action } from "@/lib/reducer";
 import { BadgeMinus, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import {
@@ -11,7 +13,12 @@ import {
 
 import { Button } from "./ui/button";
 
-function BookSingle({ book, dispatch }: any) {
+interface BookSingleProps {
+  book: Book;
+  dispatch: React.Dispatch<Action>;
+}
+
+function BookSingle({ book, dispatch }: BookSingleProps) {
   return (
     <Card className="w-80">
       <CardHeader>
