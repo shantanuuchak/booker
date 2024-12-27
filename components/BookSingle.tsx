@@ -1,5 +1,3 @@
-import { Book } from "@/types/interfaces";
-import { Action } from "@/lib/reducer";
 import { BadgeMinus, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import {
