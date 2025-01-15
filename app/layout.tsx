@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@/components/theme-provider";
 
 import type { Metadata } from "next";
-import { Teachers } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const teachers = Teachers({
-  variable: "--font-teachers",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${teachers.className} antialiased`}>
+      <body className={`${outfit.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
