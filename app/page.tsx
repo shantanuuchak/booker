@@ -15,11 +15,11 @@ const getBooksFromLocalStorage = () => {
 };
 
 // Set books to localStorage
-const saveBooksToLocalStorage = (books: any[]) => {
+const saveBooksToLocalStorage = (books: Book[]) => {
   localStorage.setItem("books", JSON.stringify(books));
 };
 
-function Home() {
+function Page() {
   const [books, dispatch] = useReducer(booksReducer, [], () =>
     getBooksFromLocalStorage()
   );
@@ -40,4 +40,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Page;
