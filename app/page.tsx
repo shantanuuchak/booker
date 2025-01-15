@@ -4,18 +4,17 @@ import { useEffect, useReducer } from "react";
 import { booksReducer } from "@/lib/reducer";
 import { initialBooks } from "@/lib/sample-data";
 
-import { LampDemo } from "@/components/ui/lamp";
-import Header from "@/components/Header";
 import AddBook from "@/components/AddBook";
 import BookList from "@/components/BookList";
+import Hero from "@/components/Hero";
 
-// Helper function to get books from localStorage
+// Get books from localStorage
 const getBooksFromLocalStorage = () => {
   const savedBooks = localStorage.getItem("books");
   return savedBooks ? JSON.parse(savedBooks) : initialBooks;
 };
 
-// Helper function to save books to localStorage
+// Set books to localStorage
 const saveBooksToLocalStorage = (books: any[]) => {
   localStorage.setItem("books", JSON.stringify(books));
 };
@@ -31,8 +30,7 @@ function Home() {
 
   return (
     <>
-      <Header />
-      <LampDemo title="Booker &mdash; rank books to read." />
+      <Hero />
       <hr className="mb-10" />
       <main className="max-w-7xl mx-auto px-2 text-2xl">
         <AddBook dispatch={dispatch} />

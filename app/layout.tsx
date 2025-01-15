@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/Header";
+
 
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
@@ -28,6 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
         </ThemeProvider>
       </body>
