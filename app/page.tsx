@@ -20,9 +20,14 @@ const saveBooksToLocalStorage = (books: Book[]) => {
 };
 
 function Page() {
-  const [books, dispatch] = useReducer(booksReducer, [], () =>
-    getBooksFromLocalStorage()
-  );
+  const ISSERVER = typeof window === "undefined";
+  const [books, dispatch] = useReducer(booksReducer, [], () => {
+    if (!ISSERVER) {
+      return getBooksFromLocalStorage();
+    } else {
+      return [];
+    }
+  });
 
   useEffect(() => {
     saveBooksToLocalStorage(books);
